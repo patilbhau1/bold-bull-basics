@@ -36,19 +36,30 @@ export const fetchStockQuote = async (symbol: string): Promise<StockQuote> => {
   // Try different symbol formats: original, .NS (NSE), .BSE (BSE)
   const symbolVariants = [symbol, `${symbol}.NS`, `${symbol}.BSE`];
   
+  console.log(`Searching for stock: ${symbol}`);
+  console.log(`Trying variants: ${symbolVariants.join(', ')}`);
+  
   for (const variant of symbolVariants) {
     try {
+      console.log(`Trying variant: ${variant}`);
       const response = await fetch(
         `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${variant}&apikey=${ALPHA_VANTAGE_API_KEY}`
       );
       
       if (!response.ok) {
+        console.log(`Response not ok for ${variant}: ${response.status}`);
         continue; // Try next variant
       }
       
       const data = await response.json();
+      console.log(`Data for ${variant}:`, data);
       
       if (data['Error Message'] || data['Note'] || !data['Global Quote']) {
+        console.log(`Invalid data for ${variant}:`, {
+          errorMessage: data['Error Message'],
+          note: data['Note'],
+          hasGlobalQuote: !!data['Global Quote']
+        });
         continue; // Try next variant
       }
     
