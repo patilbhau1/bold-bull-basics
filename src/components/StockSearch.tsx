@@ -20,7 +20,7 @@ const StockSearch = ({ onSearch, isLoading }: StockSearchProps) => {
     }
   };
 
-  const popularStocks = ['AAPL', 'TSLA', 'GOOGL', 'MSFT', 'NVDA', 'AMZN'];
+  const popularStocks = ['AAPL', 'TSLA', 'GOOGL', 'MSFT', 'NVDA', 'AMZN', 'RELIANCE', 'TCS', 'INFY', 'HDFC'];
 
   return (
     <section 
@@ -53,7 +53,7 @@ const StockSearch = ({ onSearch, isLoading }: StockSearchProps) => {
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-6 w-6" />
                 <Input
                   type="text"
-                  placeholder="Enter stock symbol (e.g., AAPL, TSLA, GOOGL)"
+                  placeholder="Enter stock symbol (e.g., AAPL, TSLA, RELIANCE, TCS)"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-12 h-16 text-lg border-2 focus:ring-2 focus:ring-primary/20"
@@ -76,7 +76,7 @@ const StockSearch = ({ onSearch, isLoading }: StockSearchProps) => {
             </form>
 
             <div className="mt-8">
-              <p className="text-sm text-muted-foreground mb-4">Popular stocks to try:</p>
+              <p className="text-sm text-muted-foreground mb-4">Popular stocks to try (US & Indian markets):</p>
               <div className="flex flex-wrap gap-2 justify-center">
                 {popularStocks.map((stock) => (
                   <Button
